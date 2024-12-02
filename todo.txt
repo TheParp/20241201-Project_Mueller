@@ -1,0 +1,20 @@
+Project Mueller
+TEXT MODE
+- keep a db of known coordinates with elevation, get a report
+- convert fbk to txt
+- compute free flow for different pipe parameters
+- keep a db of rain intensity byregion and update it online
+- compute rain intensity
+
+GUI MODE
+- compute free flow network data
+- import/export network data
+- pressure network simulator (gamelike)
+
+
+
+
+First steps 01/12/2024
+- when launched, the program arguments are tested
+    - if no arguments are present, open gui
+    - if -? , show how to use the command arguments
