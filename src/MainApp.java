@@ -4,14 +4,17 @@
  */
 public class MainApp {
     public static void main(String[] args) {
-
-        // Validate the command arguments
-        int argsChoice = Validations.validateArgs(args);
-
-        if (argsChoice == 1) {
-            System.out.printf("PROGRAMME PARTI!!!!\n\n");
+    
+        CmdArgument cmdArgs = new CmdArgument(args);
+        
+        if (cmdArgs.argumentIsNotCmd()) {
+            System.exit(0);
         }
         
+        Messages.txtWelcome("main");
+        
+       
+
     }
 
 }
