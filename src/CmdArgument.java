@@ -1,16 +1,23 @@
-/*
+/**
  * 
- * 
- * 
+ * This object class will manage the program line arguments.
+ * The object contains :
+ * - a variable representing the number of arguments given
+ * by the user
+ * - a String array representing all other arguments given
  */
 class CmdArgument {
+
+    // This variable is declared as an array. 
+    // It is the default to prevent the command line arguments to be empty
+    String[] GUI_ARGUMENT = {"gui"}; 
+    
+    String LIST_ARGUMENT = "-?";
     
     int argNum;
     String[] arguments;
-    String[] GUI_ARG = {"gui"};
-    String[] knownCommands = {"-c", "-?", "gui"};
+    String[] knownCommands = {"gui", "-c", "-?"};
     
-    String OPTION_CMD_LIST = "-?";
 
     public CmdArgument(String[] inputArgs) {
         this.argNum = inputArgs.length;
@@ -18,7 +25,7 @@ class CmdArgument {
 
         // Initialize the first string of arguments array to gui since empty
         if (argNum == 0) {
-            this.arguments = GUI_ARG.clone();
+            this.arguments = GUI_ARGUMENT.clone();
         }
     }
 
@@ -33,7 +40,7 @@ class CmdArgument {
     }
 
     public boolean isAskingGui() {
-        if (argNum == 0 || (argNum == 1 && arguments[0].equals(GUI_ARG[0]))) {
+        if (argNum == 0 || (argNum == 1 && arguments[0].equals(GUI_ARGUMENT[0]))) {
             return true;
         }
         else {
@@ -42,7 +49,7 @@ class CmdArgument {
     }
 
     public boolean isAskingCmdList() {
-        if (arguments[0].equals(OPTION_CMD_LIST)) {
+        if (arguments[0].equals(LIST_ARGUMENT)) {
             return true;
         }
         else {
@@ -50,6 +57,12 @@ class CmdArgument {
         }
     }
 
+    /*
+     * This function check if the first Argument is a command. 
+     * If user wants something else than a txt command, 
+     * the appropriate message is showned
+     * 
+     */
     public boolean argumentIsNotCmd() {
         if (this.isAskingGui()) {
             messageUsage("gui");
@@ -65,6 +78,12 @@ class CmdArgument {
         }
         return false;
     }
+
+    public String getCommand() {
+        return arguments[0];
+    }
+
+
 
     public static void messageUsage(String in) {
         String MESS_GUI_CONSTRUCTION = "\n" +

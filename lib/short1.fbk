@@ -1,0 +1,31 @@
+! Collège Ahuntsic
+! Fichier Format .FBK pour Leica Flexline
+
+UNITS METER DMS
+
+JOB:  201894342
+! Génie Civil, Collège Ahuntsic, Montréal
+! Remarque 1:
+! Remarque 2:
+! Instrument: TS07 3" R500   S/N:
+! Opérateur:
+! Date: 2023/10/03	12h18
+!
+! NEZ NoPoint Y X Z "Desc"
+NEZ 13180 5045667.492 293571.488 32.531 "CLU"
+NEZ 15050 5045724.787 293612.109 33.597 "CLU"
+
+
+! ----- Mise en Station -----
+STN 13180 1.649
+
+! ----- Visée arrière -----
+BS 15050 270.00447
+PRISM 1.300
+F1 VA 15050  270.00447  70.228  89.23432 "CLU"     ! Desc.Code:
+PRISM 1.300
+F1 VA 1000  253.42138  13.703  90.49574 "TRO1 DC"     ! Desc.Code:
+PRISM 1.300
+F1 VA 1001  249.18057  5.185  93.11235 "TRO1 CC"     ! Desc.Code:
+PRISM 1.300
+F1 VA 1002  244.55360  3.609  93.51120 "TRO1"     ! Desc.Code:
