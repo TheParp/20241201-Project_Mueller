@@ -23,6 +23,9 @@ public class MainApp {
                     System.exit(2);
                 }
 
+                
+                Fbk test = new Fbk(FileIo.importFile(cmdArgs.arguments[1]));
+
                 String outputPath;
 
                 // Try the output file path
@@ -31,11 +34,11 @@ public class MainApp {
                 }
                 catch (ArrayIndexOutOfBoundsException e) {
                     // Gives default file name
-                    outputPath = "noname.txt";
+                    outputPath = test.getJobName();
                 }
 
-                Fbk test = new Fbk(FileIo.importFile(cmdArgs.arguments[1]));
-                FileIo.exportFile(test.getFbk(), outputPath);
+                FileIo.exportFile(test.getOutputCoords(), outputPath + ".txt");
+                System.out.printf("%s\n", test.toString());
 
             
                 // set file lines in a string list

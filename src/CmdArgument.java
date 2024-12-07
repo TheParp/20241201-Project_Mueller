@@ -6,7 +6,7 @@
  * by the user
  * - a String array representing all other arguments given
  */
-class CmdArgument {
+public class CmdArgument {
 
     // This variable is declared as an array. 
     // It is the default to prevent the command line arguments to be empty

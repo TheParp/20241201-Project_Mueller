@@ -5,7 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-class FileIo {
+/**
+ * This Class contains all the methods necessary for input or ouput data in text mode.
+ */
+public class FileIo {
 
     public static ArrayList<String> importFile (String filePath) {
         ArrayList<String> fileContent = new ArrayList<>();
