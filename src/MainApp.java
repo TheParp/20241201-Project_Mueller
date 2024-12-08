@@ -44,6 +44,19 @@ public class MainApp {
 
                 break;
             case "-itxt":
+
+
+                // utiliser string join
+                // verifier outpu fichiet  déjà existant
+                // verifier input fichier bon extension
+                // demander nom de fichier output
+                // faire en sorte que l'objet coord renvoie un description sans guillemets ou avec
+                // throw les exceptions fileio
+                
+
+
+
+
                 System.out.printf("itxt\n");
                 break;
             default:
