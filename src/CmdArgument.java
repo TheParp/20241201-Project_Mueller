@@ -5,25 +5,26 @@
  * - a variable representing the number of arguments given
  * by the user
  * - a String array representing all other arguments given
+ * 
  */
 public class CmdArgument {
 
     // This variable is declared as an array. 
     // It is the default to prevent the command line arguments to be empty
-    String[] GUI_ARGUMENT = {"gui"}; 
-    
-    String LIST_ARGUMENT = "-?";
+    final private String[] GUI_ARGUMENT = {"gui"}; 
+    final private String LIST_ARGUMENT = "-?";
+
+    final private String[] KNOWN_COMMANDS = {"gui", "-c", "-itxt", "-?"};
     
     int argNum;
     String[] arguments;
-    String[] knownCommands = {"gui", "-c", "-?"};
     
 
     public CmdArgument(String[] inputArgs) {
         this.argNum = inputArgs.length;
         this.arguments = inputArgs.clone();
 
-        // Initialize the first string of arguments array to gui since empty
+        // Initialize the first string of arguments array to gui if empty
         if (argNum == 0) {
             this.arguments = GUI_ARGUMENT.clone();
         }
@@ -31,8 +32,8 @@ public class CmdArgument {
 
     public boolean isNotValidCmd() {
         // Search through the known commands to see if input valid
-        for (int i = 0; i < knownCommands.length; i++) {
-            if (knownCommands[i].equals(this.arguments[0])){
+        for (int i = 0; i < KNOWN_COMMANDS.length; i++) {
+            if (KNOWN_COMMANDS[i].equals(this.arguments[0])){
                 return false;
             }
         }
@@ -108,7 +109,9 @@ public class CmdArgument {
                                 "---------------------------------------------------------\n" +
                                 "\n" +
                                 "gui __ GUI app\n" +
-                                "-c __ Option 1\n" +
+                                "-c __ Convert a fieldbook (.fbk) to a coordinate (.txt) file\n" +
+                                "      Must provide an input filename. If no output filename is\n" +
+                                "      provided, the output file will be named after the job\n" +
                                 "\n";
 
         if (in == "gui") {

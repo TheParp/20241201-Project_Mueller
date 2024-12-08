@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * This Class contains all the methods necessary for input or ouput data in text mode.
  */
-public class FileIo {
+public class ToolsFileIo {
 
     public static ArrayList<String> importFile (String filePath) {
         ArrayList<String> fileContent = new ArrayList<>();

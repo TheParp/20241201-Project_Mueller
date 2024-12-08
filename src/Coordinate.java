@@ -1,6 +1,7 @@
 public class Coordinate {
 
     final static String SEPARATOR_CHARACTER = " ";
+    final static String DESCRIPTION_DELIM = "\"";
     final static String NOT_INIT = "Not Initialized";
 
     int pointNumber;
@@ -41,15 +42,7 @@ public class Coordinate {
         this.easting = extractEastingFromFbk(nez);
         this.elevation = extractElevationFromFbk(nez);
 
-        // Concat all the description elements
-        if (nez.length >= 7) {
-            this.description = nez[6];
-            for (int i = 7; i < nez.length; i++) {
-                this.description += " " + nez[i];
-            }
-        }
-        
-        this.description.strip();
+        this.description = ToolsFormat.fbkConcatDescription(7, nez, SEPARATOR_CHARACTER, DESCRIPTION_DELIM);
     }
 
     private int extractPointNumberFromFbk(String[] nez) {
@@ -136,11 +129,8 @@ public class Coordinate {
     }
 
 
-    public String getTxtLine() {
-        String line;
-
-        line = pointNumber + SEPARATOR_CHARACTER + northing + SEPARATOR_CHARACTER + easting + SEPARATOR_CHARACTER + elevation + SEPARATOR_CHARACTER + description;
+    public String toString() {
+        return String.format("%d%s%.4f%s%.4f%s%.4f%s%s", pointNumber, SEPARATOR_CHARACTER, northing, SEPARATOR_CHARACTER, easting, SEPARATOR_CHARACTER, elevation, SEPARATOR_CHARACTER, description);
         
-        return line;
     }
 }

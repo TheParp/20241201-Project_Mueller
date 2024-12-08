@@ -17,16 +17,17 @@ public class MainApp {
 
         switch (cmdArgs.getCommand()) {
             case "-c" :
+            
+                String outputPath;
                 // Name file provided ?
                 if (cmdArgs.argNum < 2) {
                     System.out.printf("Input file name not provided");
                     System.exit(2);
                 }
 
+                // Import a fbk file from the path provided in the command arguments
+                Fbk input = new Fbk(ToolsFileIo.importFile(cmdArgs.arguments[1]));
                 
-                Fbk test = new Fbk(FileIo.importFile(cmdArgs.arguments[1]));
-
-                String outputPath;
 
                 // Try the output file path
                 try {
@@ -34,17 +35,18 @@ public class MainApp {
                 }
                 catch (ArrayIndexOutOfBoundsException e) {
                     // Gives default file name
-                    outputPath = test.getJobName();
+                    outputPath = input.getJobName();
                 }
 
-                FileIo.exportFile(test.getOutputCoords(), outputPath + ".txt");
-                System.out.printf("%s\n", test.toString());
+                // Output converted file
+                ToolsFileIo.exportFile(input.getOutputCoords(), outputPath + ".txt");
+                System.out.printf("***File Succesfully Converted***\n\n");
 
-            
-                // set file lines in a string list
-                // verify the fbk data validity
-                // convert to txt string list
-                // close the program
+                break;
+            case "-itxt":
+                System.out.printf("itxt\n");
+                break;
+            default:
                 break;
         }
         

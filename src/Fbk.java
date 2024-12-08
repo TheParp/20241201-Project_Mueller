@@ -1,9 +1,14 @@
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ */
 public class Fbk {
 
     final static String ESCAPE_CHARACTER = "!";
     final static String SEPARATOR_CHARACTER = " ";
+    final static String DESCRIPTION_DELIM = "\"";
     final static int MAX_DESCRIPTION_LENGTH = 5;
 
     ArrayList<String> inputFbk;
@@ -13,7 +18,11 @@ public class Fbk {
     String jobDistanceUnits;
     String jobAngleUnits;
 
-    public Fbk (ArrayList<String> inputFile) {
+    /**
+     * 
+     * @param inputFile
+     */
+    public Fbk(ArrayList<String> inputFile) {
         this.inputFbk = inputFile;
         this.formatedFbk = new ArrayList<>(inputFile);
         this.jobName = "";
@@ -37,7 +46,7 @@ public class Fbk {
         ArrayList<String> stripedFbk = new ArrayList<>();
 
         for (int i = 0; i < formatedFbk.size(); i++) {
-            String[] tmpList = formatedFbk.get(i).replaceAll("\"","").split(ESCAPE_CHARACTER);
+            String[] tmpList = formatedFbk.get(i).replaceAll(DESCRIPTION_DELIM,"").split(ESCAPE_CHARACTER);
             stripedFbk.add(tmpList[0]);
         }
         formatedFbk = stripedFbk;
@@ -97,18 +106,22 @@ public class Fbk {
         }
     }
 
-
-
-
+    /**
+     * This method will compute all the coordinates from a complete formted fbk
+     * included in the Fbk object as a String Assray list.
+     * 
+     * @return a String Array list including coordinates of all survey points from fieldbook
+     */
     private ArrayList<String> computeCoordinates() {
         String[] tmpList;
+        double bsAngle = 0;
 
         Coordinate nowStation = new Coordinate();
         Coordinate nowBacksight = new Coordinate();
         double nowPrism = -1;
 
         ArrayList<Coordinate> knownCoords = new ArrayList<>();
-        ArrayList<Coordinate> outputCoords = new ArrayList<>();
+        ArrayList<Coordinate> surveyCoords = new ArrayList<>();
         ArrayList<String> formatedOutput = new ArrayList<>();
  
         for (String line : formatedFbk) {
@@ -144,8 +157,6 @@ public class Fbk {
                         System.exit(1);
                     }
                 }
-                outputCoords.add(nowStation); // a enlenver
-
             }
 
 
@@ -166,7 +177,7 @@ public class Fbk {
                                                           coord.getNorthing(),
                                                           coord.getEasting(),
                                                           coord.getElevation(),
-                                                          (String)tmpList[3]); // Height from STN reading
+                                                          (String)tmpList[3]); // Angle from ref reading
                         }
                     }
                     catch(NumberFormatException e) {
@@ -174,7 +185,6 @@ public class Fbk {
                         System.exit(1);
                     }
                 }
-                outputCoords.add(nowBacksight); // a enlenver
             }
 
 
@@ -199,15 +209,10 @@ public class Fbk {
                     System.out.printf("Prism height not a number, line %s\n", tmpList[0]);
                     System.exit(1);
                 }
-
-                outputCoords.add(new Coordinate(0,0,0,0,Double.toString(nowPrism))); // a enlenver
             }
 
 
-            else if (tmpList[1].contains("F1")) {
-
-
-                
+            else if (tmpList[1].contains("F1")) {                
                 if (tmpList.length < 7 || tmpList.length > 7 + MAX_DESCRIPTION_LENGTH) {
                     System.out.printf("Problem with survey data on line %s\n", tmpList[0]);
                     System.exit(1);
@@ -225,25 +230,26 @@ public class Fbk {
                     System.exit(1);
                 }
 
-            }
-            else {
+                Coordinate surveyPoint = new Coordinate();
                 
-            }
-
-            
+                bsAngle = ToolsFormulas.fbkComputeBsAngle(nowStation, nowBacksight);
+                surveyPoint = ToolsFormulas.fbkComputeCoord(tmpList, bsAngle, nowStation, nowBacksight, nowPrism, jobAngleUnits);
+                
+                surveyPoint.description = ToolsFormat.fbkConcatDescription(8, tmpList, SEPARATOR_CHARACTER, DESCRIPTION_DELIM);    
+                surveyCoords.add(surveyPoint);
+                
+            }            
         }
 
-        for (Coordinate coord : outputCoords) {
-            formatedOutput.add(coord.getTxtLine());
+        for (Coordinate coord : surveyCoords) {
+            formatedOutput.add(coord.toString());
         }
         for (Coordinate coord : knownCoords) {
-            formatedOutput.add(coord.getTxtLine());
+            formatedOutput.add(coord.toString());
         }
 
         return formatedOutput;
     }
-
-
 
 
     public ArrayList<String> getFbk() {
