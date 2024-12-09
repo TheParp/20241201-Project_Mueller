@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * 
+ * This class can 
  * 
  */
 public class Fbk {
@@ -170,6 +170,9 @@ public class Fbk {
                     System.exit(1);
                 }
 
+                // TODO -- Faire méthode de recherche
+
+                
                 for (Coordinate coord : knownCoords) {
                     try{
                         if (coord.getPointNumber() == Integer.parseInt(tmpList[2])) {

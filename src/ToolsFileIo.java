@@ -10,6 +10,11 @@ import java.util.ArrayList;
  */
 public class ToolsFileIo {
 
+    /**
+     * 
+     * @param filePath
+     * @return
+     */
     public static ArrayList<String> importFile (String filePath) {
         ArrayList<String> fileContent = new ArrayList<>();
         String line;
@@ -29,6 +34,12 @@ public class ToolsFileIo {
         return fileContent;
     }
 
+    /**
+     * 
+     * @param content
+     * @param filePath
+     * @return
+     */
     public static boolean exportFile (ArrayList<String> content, String filePath) {
         try {
             BufferedWriter outputFile = new BufferedWriter(new FileWriter(filePath));

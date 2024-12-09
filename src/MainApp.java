@@ -8,6 +8,8 @@ public class MainApp {
     
         CmdArgument cmdArgs = new CmdArgument(args);
         
+
+        // TODO mettre dans la classe CmdArgument
         if (cmdArgs.argumentIsNotCmd()) {
             System.exit(0);
         }
@@ -45,7 +47,7 @@ public class MainApp {
                 break;
             case "-itxt":
 
-
+                // Transformer l'objet Coordinate en point 3d ou copier les méthodes
                 // utiliser string join
                 // verifier outpu fichiet  déjà existant
                 // verifier input fichier bon extension
