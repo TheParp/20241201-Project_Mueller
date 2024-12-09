@@ -33,7 +33,7 @@ public class Fbk {
         removeEmptyLines();
         findJobName();
         findJobUnits();
-        this.outputCoords = computeCoordinates();
+        this.outputCoords = computeFbkLines();
     }
 
     private void addLineNumber() {
@@ -112,7 +112,7 @@ public class Fbk {
      * 
      * @return a String Array list including coordinates of all survey points from fieldbook
      */
-    private ArrayList<String> computeCoordinates() {
+    private ArrayList<String> computeFbkLines() {
         String[] tmpList;
         double bsAngle = 0;
 
