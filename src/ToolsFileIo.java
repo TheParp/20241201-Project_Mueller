@@ -7,6 +7,10 @@ import java.util.ArrayList;
 
 /**
  * This Class contains all the methods necessary for input or ouput data in text mode.
+ * 
+ * @author Alexandre Parent
+ * @since v0.1
+ * @version v0.1
  */
 public class ToolsFileIo {
 

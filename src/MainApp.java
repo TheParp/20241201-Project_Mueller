@@ -47,13 +47,13 @@ public class MainApp {
                 break;
             case "-itxt":
 
-                // Transformer l'objet Coordinate en point 3d ou copier les méthodes
                 // utiliser string join
                 // verifier outpu fichiet  déjà existant
                 // verifier input fichier bon extension
                 // demander nom de fichier output
                 // faire en sorte que l'objet coord renvoie un description sans guillemets ou avec
                 // throw les exceptions fileio
+                // search method pour le spoints
                 
 
 
